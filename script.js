@@ -2,6 +2,8 @@
 const screen = document.querySelector(".screen");
 //global variables and arrays
 let total = 0;
+let lastValue = null;
+let currentValue = "";
 let typedValue = "";
 let operator = "";
 //functions
@@ -34,16 +36,24 @@ function operate(value1,value2,operator){
 }
 function checkForOperator(event) {
     if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/" ){
+        if (lastValue != null){
+            currentValue = operate(lastValue,Number(currentValue),operator);
+        }
         operator = event.key;
-        console.log(total + operator + typedValue + " =")
-        total = operate(total,Number(typedValue),operator);
-        typedValue = "";
-        console.log(total);
+        lastValue = Number(currentValue);
+        currentValue = ""
+        screen.textContent = lastValue;
         
     }
+    else if(event.key == "c"){
+        lastValue = null;
+        currentValue = "";
+        operator = "";
+        screen.textContent = "";
+    }
     else {
-        typedValue += event.key;
-        screen.textContent = typedValue;
+        currentValue += event.key;
+        screen.textContent = currentValue;
     }
 }
 //Event listeners
