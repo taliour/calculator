@@ -1,6 +1,6 @@
 //global variables and arrays
 let total = 0;
-let typedValue = "";
+let typedValue = "0";
 let operator = "";
 //functions
 
