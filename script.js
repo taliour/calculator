@@ -1,6 +1,8 @@
+//DOM variables
+const screen = document.querySelector(".screen");
 //global variables and arrays
 let total = 0;
-let typedValue = "0";
+let typedValue = "";
 let operator = "";
 //functions
 
@@ -41,6 +43,7 @@ function checkForOperator(event) {
     }
     else {
         typedValue += event.key;
+        screen.textContent = typedValue;
     }
 }
 //Event listeners

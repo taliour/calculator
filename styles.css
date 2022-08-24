@@ -28,6 +28,11 @@ body{
     border-radius: 10px;
     background-color: #B80F0A;
     color: white;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 .buttons {
     display: flex;
