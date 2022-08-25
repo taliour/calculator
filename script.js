@@ -55,7 +55,7 @@ function checkForKeyboard(event) {
         operator = "";
         screen.textContent = "";
     }
-    else {
+    else if (Number(event.key)%1 == 0) {
         currentValue += event.key;
         screen.textContent = currentValue;
     }
@@ -82,13 +82,18 @@ function clearCalculatorUI(){
     screen.textContent = "";
 }
 //Event listeners
+
+//Check for keyboard button pressed
 window.addEventListener("keypress", (event) => {checkForKeyboard(event);});
 
+//Check for number pressed on UI
 number.forEach(function(number){
     number.addEventListener("click", () =>{appendNumbersUI(number)})});
 
+//Check for operator pressed on UI
 operatorUI.forEach(function(operatorUI){
     operatorUI.addEventListener("click",() =>{checkForOperatorsUI(operatorUI)})
 });
 
+//Clear the calculator when C button pressed on UI
 clearUI.addEventListener("click",() => {clearCalculatorUI()});
