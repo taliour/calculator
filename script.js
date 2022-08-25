@@ -38,7 +38,7 @@ function operate(value1,value2,operator){
 }
 //Checks for operators and assigns values when keyboard buttons pressed
 function checkForKeyboard(event) {
-    //operate if = sign pressed on keyboard
+    //operate if = sign pressed on keyboard 
     if (event.key == "="){
         if (lastValue != null){
             currentValue = operate(lastValue,Number(currentValue),operator);
@@ -67,11 +67,17 @@ function checkForKeyboard(event) {
         operator = "";
         screen.textContent = "";
     }
+    //Add decimal when dot . pressed and don't allow more than one
+    else if(event.key == "." && currentValue.split(".").length < 2){
+        currentValue += event.key;
+        screen.textContent = currentValue;
+    }
     //append number if number pressed on keyboard
     else if (Number(event.key)%1 == 0) {
         currentValue += event.key;
         screen.textContent = currentValue;
     }
+    //remove last character from currentValue string and update the text content of screen
     if(event.key == "Backspace"){
         if (currentValue !=""){
             currentValue = currentValue.slice(0,-1);
