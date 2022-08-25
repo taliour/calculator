@@ -5,10 +5,8 @@ const operatorUI = document.querySelectorAll(".operator");
 const clearUI = document.querySelector(".clear");
 const equalUI = document.querySelector(".equal");
 //global variables and arrays
-let total = 0;
 let lastValue = null;
 let currentValue = "";
-let typedValue = "";
 let operator = "";
 //functions
 
@@ -74,6 +72,12 @@ function checkForKeyboard(event) {
         currentValue += event.key;
         screen.textContent = currentValue;
     }
+    if(event.key == "Backspace"){
+        if (currentValue !=""){
+            currentValue = currentValue.slice(0,-1);
+            screen.textContent = currentValue;
+        }
+    }
 }
 //Appends number to current number when clicked in the UI
 function appendNumbersUI(number){
@@ -109,7 +113,7 @@ function pressedEqualUI(){
 //Event listeners
 
 //Check for keyboard button pressed
-window.addEventListener("keypress", (event) => {checkForKeyboard(event);});
+window.addEventListener("keydown", (event) => {checkForKeyboard(event);});
 
 //Check for number pressed on UI
 number.forEach(function(number){
