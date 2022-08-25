@@ -40,6 +40,7 @@ function operate(value1,value2,operator){
 }
 //Checks for operators and assigns values when keyboard buttons pressed
 function checkForKeyboard(event) {
+    //operate if = sign pressed on keyboard
     if (event.key == "="){
         if (lastValue != null){
             currentValue = operate(lastValue,Number(currentValue),operator);
@@ -48,6 +49,7 @@ function checkForKeyboard(event) {
         currentValue = "";
         screen.textContent = lastValue;
     }
+    //operate if operator pressed on keyboard
     else if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/"){
         if (lastValue != null && currentValue!= ""){
             currentValue = operate(lastValue,Number(currentValue),operator);
@@ -60,12 +62,14 @@ function checkForKeyboard(event) {
             console.log("fuck off");
         }
     }
+    //clear if c pressed on keyboard
     else if(event.key == "c"){
         lastValue = null;
         currentValue = "";
         operator = "";
         screen.textContent = "";
     }
+    //append number if number pressed on keyboard
     else if (Number(event.key)%1 == 0) {
         currentValue += event.key;
         screen.textContent = currentValue;
@@ -78,13 +82,15 @@ function appendNumbersUI(number){
 }
 function checkForOperatorsUI(operatorUI){
 
-    if (lastValue != null){
+    if (lastValue != null && currentValue!= ""){
         currentValue = operate(lastValue,Number(currentValue),operator);
     }
     operator = operatorUI.textContent;
-    lastValue = Number(currentValue);
-    currentValue = ""
-    screen.textContent = lastValue;
+    if (currentValue !=""){
+        lastValue = Number(currentValue);
+        currentValue = ""
+        screen.textContent = lastValue;
+    }
 }
 function clearCalculatorUI(){
     lastValue = null;
