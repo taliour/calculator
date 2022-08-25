@@ -3,6 +3,7 @@ const screen = document.querySelector(".screen");
 const number = document.querySelectorAll(".number");
 const operatorUI = document.querySelectorAll(".operator");
 const clearUI = document.querySelector(".clear");
+const equalUI = document.querySelector(".equal");
 //global variables and arrays
 let total = 0;
 let lastValue = null;
@@ -89,6 +90,14 @@ function clearCalculatorUI(){
     operator = "";
     screen.textContent = "";
 }
+function pressedEqualUI(){
+    if (lastValue != null){
+        currentValue = operate(lastValue,Number(currentValue),operator);
+    }
+    lastValue = Number(currentValue);
+    currentValue = "";
+    screen.textContent = lastValue;
+}
 //Event listeners
 
 //Check for keyboard button pressed
@@ -103,5 +112,8 @@ operatorUI.forEach(function(operatorUI){
     operatorUI.addEventListener("click",() =>{checkForOperatorsUI(operatorUI)})
 });
 
-//Clear the calculator when C button pressed on UI
+//Check when C button pressed on UI
 clearUI.addEventListener("click",() => {clearCalculatorUI()});
+
+//Check for = sign pressed on UI
+equalUI.addEventListener("click", ()=> {pressedEqualUI()});
