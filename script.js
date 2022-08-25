@@ -1,6 +1,8 @@
 //DOM variables
 const screen = document.querySelector(".screen");
 const number = document.querySelectorAll(".number");
+const operatorUI = document.querySelectorAll(".operator");
+const clearUI = document.querySelector(".clear");
 //global variables and arrays
 let total = 0;
 let lastValue = null;
@@ -35,6 +37,7 @@ function operate(value1,value2,operator){
         return divide(value1,value2);
     }
 }
+//Checks for operators and assigns values when keyboard buttons pressed
 function checkForKeyboard(event) {
     if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/" ){
         if (lastValue != null){
@@ -57,12 +60,35 @@ function checkForKeyboard(event) {
         screen.textContent = currentValue;
     }
 }
+//Appends number to current number when clicked in the UI
 function appendNumbersUI(number){
     currentValue += number.textContent;
     screen.textContent = currentValue;
+}
+function checkForOperatorsUI(operatorUI){
+
+    if (lastValue != null){
+        currentValue = operate(lastValue,Number(currentValue),operator);
+    }
+    operator = operatorUI.textContent;
+    lastValue = Number(currentValue);
+    currentValue = ""
+    screen.textContent = lastValue;
+}
+function clearCalculatorUI(){
+    lastValue = null;
+    currentValue = "";
+    operator = "";
+    screen.textContent = "";
 }
 //Event listeners
 window.addEventListener("keypress", (event) => {checkForKeyboard(event);});
 
 number.forEach(function(number){
     number.addEventListener("click", () =>{appendNumbersUI(number)})});
+
+operatorUI.forEach(function(operatorUI){
+    operatorUI.addEventListener("click",() =>{checkForOperatorsUI(operatorUI)})
+});
+
+clearUI.addEventListener("click",() => {clearCalculatorUI()});
