@@ -8,6 +8,7 @@ const equalUI = document.querySelector(".equal");
 let lastValue = null;
 let currentValue = "";
 let operator = "";
+let maxNumberLength = 19;
 //functions
 
 function add(total,addedValue){
@@ -73,7 +74,7 @@ function checkForKeyboard(event) {
         screen.textContent = currentValue;
     }
     //append number if number pressed on keyboard
-    else if (Number(event.key)%1 == 0) {
+    else if (Number(event.key)%1 == 0 && screen.textContent.length < maxNumberLength) {
         currentValue += event.key;
         screen.textContent = currentValue;
     }
@@ -90,7 +91,7 @@ function appendNumbersUI(number){
     currentValue += number.textContent;
     screen.textContent = currentValue;
 }
-function checkForOperatorsUI(operatorUI){
+function pressedOperatorsUI(operatorUI){
 
     if (lastValue != null && currentValue!= ""){
         currentValue = operate(lastValue,Number(currentValue),operator);
@@ -127,7 +128,7 @@ number.forEach(function(number){
 
 //Check for operator pressed on UI
 operatorUI.forEach(function(operatorUI){
-    operatorUI.addEventListener("click",() =>{checkForOperatorsUI(operatorUI)})
+    operatorUI.addEventListener("click",() =>{pressedOperatorsUI(operatorUI)})
 });
 
 //Check when C button pressed on UI
