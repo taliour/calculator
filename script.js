@@ -58,7 +58,6 @@ function checkForKeyboard(event) {
             lastValue = Number(currentValue);
             currentValue = ""
             screen.textContent = lastValue;
-            console.log("fuck off");
         }
     }
     //clear if c pressed on keyboard
