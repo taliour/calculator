@@ -48,15 +48,17 @@ function checkForKeyboard(event) {
         currentValue = "";
         screen.textContent = lastValue;
     }
-    else if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/" ){
-        if (lastValue != null){
+    else if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/"){
+        if (lastValue != null && currentValue!= ""){
             currentValue = operate(lastValue,Number(currentValue),operator);
         }
         operator = event.key;
-        lastValue = Number(currentValue);
-        currentValue = ""
-        screen.textContent = lastValue;
-        
+        if (currentValue !=""){
+            lastValue = Number(currentValue);
+            currentValue = ""
+            screen.textContent = lastValue;
+            console.log("fuck off");
+        }
     }
     else if(event.key == "c"){
         lastValue = null;
