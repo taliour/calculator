@@ -1,5 +1,6 @@
 //DOM variables
 const screen = document.querySelector(".screen");
+const number = document.querySelectorAll(".number");
 //global variables and arrays
 let total = 0;
 let lastValue = null;
@@ -34,7 +35,7 @@ function operate(value1,value2,operator){
         return divide(value1,value2);
     }
 }
-function checkForOperator(event) {
+function checkForKeyboard(event) {
     if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/" ){
         if (lastValue != null){
             currentValue = operate(lastValue,Number(currentValue),operator);
@@ -56,5 +57,12 @@ function checkForOperator(event) {
         screen.textContent = currentValue;
     }
 }
+function appendNumbersUI(number){
+    currentValue += number.textContent;
+    screen.textContent = currentValue;
+}
 //Event listeners
-window.addEventListener("keypress", (event) => {checkForOperator(event);});
+window.addEventListener("keypress", (event) => {checkForKeyboard(event);});
+
+number.forEach(function(number){
+    number.addEventListener("click", () =>{appendNumbersUI(number)})});
