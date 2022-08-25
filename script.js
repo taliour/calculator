@@ -39,7 +39,15 @@ function operate(value1,value2,operator){
 }
 //Checks for operators and assigns values when keyboard buttons pressed
 function checkForKeyboard(event) {
-    if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/" ){
+    if (event.key == "="){
+        if (lastValue != null){
+            currentValue = operate(lastValue,Number(currentValue),operator);
+        }
+        lastValue = Number(currentValue);
+        currentValue = "";
+        screen.textContent = lastValue;
+    }
+    else if(event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/" ){
         if (lastValue != null){
             currentValue = operate(lastValue,Number(currentValue),operator);
         }
